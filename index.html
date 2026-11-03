@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bird Log</title>
+<meta name="theme-color" content="#0b5d78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bird Log">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="login" class="login" hidden>
+  <div class="ring big" aria-hidden="true">Bird Log</div>
+  <form id="login-form">
+    <label>Email <input id="login-email" type="email" autocomplete="username" required></label>
+    <label>Password <input id="login-password" type="password" autocomplete="current-password" required></label>
+    <p id="login-error" class="error" role="alert"></p>
+    <button class="primary" type="submit">Sign in</button>
+  </form>
+</section>
+
+<div id="main" hidden>
+  <header class="top">
+    <div class="top-row">
+      <h1>Bird Log</h1>
+      <p id="count" class="count"></p>
+    </div>
+    <input id="search" type="search" placeholder="Search number or name" aria-label="Search birds" autocomplete="off">
+    <div class="sort" role="group" aria-label="Sort birds">
+      <button id="sort-number" type="button" aria-pressed="true">By number</button>
+      <button id="sort-newest" type="button" aria-pressed="false">Newest first</button>
+    </div>
+  </header>
+
+  <p id="demo-note" class="demo" hidden>Demo: birds are saved on this device only.</p>
+  <ul id="list" class="list"></ul>
+  <div id="empty" class="empty" hidden></div>
+
+  <button id="log-bird" class="primary log" type="button">Log a bird</button>
+</div>
+
+<dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
+  <form id="bird-form" method="dialog" novalidate>
+    <h2 id="sheet-title">Log a bird</h2>
+
+    <label id="number-field" class="number-field">Number
+      <div class="ring number-ring"><input id="bird-number" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" aria-describedby="number-status"></div>
+    </label>
+    <p id="number-status" class="status" aria-live="polite"></p>
+
+    <label>What bird is it?
+      <input id="bird-name" maxlength="80" autocomplete="off" placeholder="Kingfisher, or “small one with red cheeks”">
+    </label>
+    <label>Note (optional)
+      <textarea id="bird-note" maxlength="300" rows="2" placeholder="Where you saw it"></textarea>
+    </label>
+
+    <p id="form-error" class="error" role="alert"></p>
+
+    <div class="actions">
+      <button id="cancel" type="button" class="quiet">Cancel</button>
+      <button id="save" type="submit" class="primary">Save bird</button>
+    </div>
+    <button id="delete" type="button" class="danger" hidden>Delete bird</button>
+  </form>
+</dialog>
+
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

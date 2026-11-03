@@ -1,0 +1,196 @@
+@font-face { font-family: Numbers; src: url(fonts/numbers.woff2) format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: Text; src: url(fonts/text.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: Text; src: url(fonts/text-bold.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+
+:root {
+  --water: #0b5d78;
+  --water-deep: #073f52;
+  --sky: #e7f1f1;
+  --paper: #fbfdfc;
+  --ink: #10323d;
+  --muted: #557079;
+  --line: #cfdedf;
+  --breast: #b8500f;
+  --danger: #a32222;
+  --free: #17694a;
+  --metal: linear-gradient(180deg, #f4f7f7 0%, #c6d0d3 42%, #e9eeef 58%, #a9b6ba 100%);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--ink);
+  font: 400 17px/1.45 Text, system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+[hidden] { display: none !important; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--breast); outline-offset: 2px; }
+
+/* The leg ring: every bird wears its number on one. */
+.ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--metal);
+  color: #1c2b30;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px #8b9a9f, inset 3px 0 2px -2px #6d7c81, inset -3px 0 2px -2px #6d7c81;
+  font: 800 25px/1 Numbers, Impact, sans-serif;
+  letter-spacing: .04em;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--water);
+  color: #fff;
+  padding: calc(14px + env(safe-area-inset-top)) 16px 12px;
+}
+.top-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+h1 { margin: 0 0 10px; font: 800 34px/1 Numbers, Impact, sans-serif; letter-spacing: .02em; }
+.count { margin: 0; color: #d6eaee; font-size: 15px; }
+#search {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.sort { display: flex; gap: 18px; margin-top: 8px; }
+.sort button {
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #d6eaee;
+  font-size: 15px;
+}
+.sort button[aria-pressed="true"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+
+.demo { margin: 0; padding: 8px 16px; background: #fbe6d3; color: #6d3107; font-size: 15px; }
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 calc(96px + env(safe-area-inset-bottom));
+}
+.bird {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 68px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  text-align: left;
+}
+.bird .ring { min-height: 38px; padding: 0 6px; }
+.bird-name { display: block; font-weight: 700; overflow-wrap: anywhere; }
+.bird-meta { display: block; color: var(--muted); font-size: 15px; overflow-wrap: anywhere; }
+
+.empty { padding: 44px 24px 120px; text-align: center; }
+.empty p { margin: 0 0 16px; }
+
+.primary {
+  min-height: 50px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--water);
+  color: #fff;
+  font-weight: 700;
+}
+.primary:disabled { background: #a5b8bd; cursor: not-allowed; }
+.log {
+  position: fixed;
+  right: 16px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 3;
+  box-shadow: 0 4px 0 var(--water-deep);
+}
+
+.sheet {
+  width: 100%;
+  max-width: 520px;
+  max-height: 92dvh;
+  margin: auto auto 0;
+  padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 16px 16px 0 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+.sheet::backdrop { background: rgba(7, 63, 82, .55); }
+.sheet h2 { margin: 0 0 14px; font: 800 28px/1 Numbers, Impact, sans-serif; letter-spacing: .02em; }
+label { display: block; margin-bottom: 14px; font-weight: 700; }
+label input:not(#bird-number), label textarea {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 5px;
+  padding: 10px 12px;
+  border: 1px solid #93acb2;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 400;
+}
+textarea { resize: vertical; }
+
+.number-field { margin-bottom: 6px; }
+.number-ring { display: flex; width: 170px; height: 66px; margin-top: 6px; padding: 0 12px; font-size: 40px; }
+#bird-number {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.number-ring:focus-within { outline: 3px solid var(--breast); outline-offset: 2px; }
+.status { min-height: 24px; margin: 0 0 12px; font-size: 16px; }
+.status.free { color: var(--free); font-weight: 700; }
+.status.taken { color: var(--danger); font-weight: 700; }
+.error { margin: 0 0 12px; color: var(--danger); font-size: 16px; }
+.error:empty { display: none; }
+
+.actions { display: flex; justify-content: flex-end; gap: 8px; }
+.quiet { min-height: 50px; padding: 0 16px; border: 0; background: none; color: var(--muted); }
+.danger {
+  display: block;
+  min-height: 44px;
+  margin: 10px 0 0 auto;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--danger);
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 100dvh;
+  padding: 24px 16px;
+  background: var(--water);
+}
+.ring.big { padding: 22px 34px; font-size: 44px; }
+.login form { width: 100%; max-width: 360px; padding: 20px 16px; border-radius: 14px; background: var(--paper); }
+.login .primary { width: 100%; }
+
+@media (min-width: 621px) {
+  #main { max-width: 620px; margin: 0 auto; background: var(--sky); }
+  .log { right: calc(50vw - 294px); }
+}
