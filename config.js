@@ -1,12 +1,12 @@
-// Replace this block with the firebaseConfig values from your Firebase project.
-// While apiKey still says PASTE, the app runs as a demo saved on one device.
+// Firebase settings for Bird Log. These are safe to be public:
+// the database rules decide who can read or change the list.
 window.BIRD_LOG_CONFIG = {
   firebase: {
-    apiKey: "PASTE_YOUR_API_KEY",
-    authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-    projectId: "PASTE_YOUR_PROJECT",
-    storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-    messagingSenderId: "PASTE",
-    appId: "PASTE"
+    apiKey: "AIzaSyC9GqOIhxtWUUizTFUrNXTy52YQGFjILvY",
+    authDomain: "birdapp-c06b7.firebaseapp.com",
+    projectId: "birdapp-c06b7",
+    storageBucket: "birdapp-c06b7.firebasestorage.app",
+    messagingSenderId: "725705071154",
+    appId: "1:725705071154:web:28eab8e01d1ac7ecce3a2b"
   }
 };
